@@ -1,9 +1,10 @@
+from flask import Flask, render_template, request, jsonify
 
+app = Flask(__name__)
 
-
+# Simple chatbot logic
 def chatBot(user_input):
-    user_input=user_input.lower()
-    print(user_input)
+    user_input = user_input.lower()
     if 'hello' in user_input:
         return 'hello, how can I serve you'
     if 'name' in user_input:
@@ -30,14 +31,20 @@ def chatBot(user_input):
         return 'Free cancellation'
     elif 'parking' in user_input:
         return 'Yes, we are providing parking in front of your room'
+    elif 'bye' in user_input:
+        return 'Goodbye! Have a great day!'
     else:
         return "Sorry, I don't have more information"
-print("Welcome to the Rajnish Hotel")
-print("Type 'Bye' to exit." )
-while True:
-    user_input=input("Ask Questions: ")
-    response=chatBot(user_input)
-    print("ChatBot:" , response)
-    if 'bye' in user_input.lower():
-        break
 
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    user_message = request.json.get("message")
+    bot_reply = chatBot(user_message)
+    return jsonify({"reply": bot_reply})
+
+if __name__ == "__main__":
+    app.run(debug=True)
