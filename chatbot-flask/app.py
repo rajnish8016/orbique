@@ -15,7 +15,11 @@ def chatBot(user_input):
         return 'Delhi'
     elif 'available' in user_input:
         return 'yes 5 rooms are available'
-    elif 'charge' in user_input:
+    elif 'check-out' in user_input:
+        return '11.00 AM'
+    elif 'check-in' in user_input:
+        return '12.00 PM'
+    elif 'price' in user_input or 'cost' in user_input or 'rent' in user_input or 'charge' in user_input:
         return '₹1500 for 24 hours'
     elif 'tourist place' in user_input:
         return 'Yes, Taj Mahal , India Gate , Lotus Temple and many more'
@@ -33,6 +37,8 @@ def chatBot(user_input):
         return 'Yes, we are providing parking in front of your room'
     elif 'bye' in user_input:
         return 'Goodbye! Have a great day!'
+    elif 'thanks' in user_input or 'thank you' in user_input:
+        return 'You are welcome!'
     else:
         return "Sorry, I don't have more information"
 
